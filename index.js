@@ -9,8 +9,14 @@ app.use(express.json())
 app.use(cors());
 
 //Connection for database
-mongoose.connect("mongodb://127.0.0.1:27017/crudoperation")
-    .then(() => console.log("connected to db"))
+mongoose.connect("mongodb://127.0.0.1:27017/crudoperation", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    socketTimeoutMS: 45000
+})
+
+.then(() => console.log("connected to db"))
     .catch((err) => console.log(err.message))
 
 //create table
